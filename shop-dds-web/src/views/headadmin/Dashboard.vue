@@ -3,7 +3,6 @@
     <el-card class="box-card welcome-card" shadow="never">
       <div class="welcome">
         <h1 class="welcome-title">欢迎使用 DDS 门店分销决策系统</h1>
-        <p class="welcome-sub">福州大学 2023级 信息管理与信息系统 第12小组</p>
         <p class="welcome-desc">
           本系统面向连锁零售企业，围绕门店补货与库存调拨场景，提供从数据汇总、物资分配到跨店调拨的一站式决策支持，
           帮助总部管理员基于库存与申请数据快速完成分销决策。
