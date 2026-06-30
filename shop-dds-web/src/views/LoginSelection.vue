@@ -24,7 +24,6 @@
       </div>
 
       <p class="login-sub" style="margin-top: 24px; font-size: 12px;">
-        福州大学 23 级信管专业《管理信息系统项目实践》第 12 小组
       </p>
     </div>
   </div>
