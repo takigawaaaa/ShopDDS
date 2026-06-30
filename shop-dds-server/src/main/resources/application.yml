@@ -40,7 +40,8 @@ mybatis-plus:
 # JWT 配置
 shopdds:
   jwt:
-    secret: shopdds-secret-key-must-be-at-least-256-bits-for-hs256-algorithm-fzu-2023
+    # !! 仅开发环境使用默认值，生产请设置环境变量 JWT_SECRET !!
+    secret: ${JWT_SECRET:shopdds-dev-only-change-in-production}
     expiration-ms: 86400000   # 24 小时
 
 server:

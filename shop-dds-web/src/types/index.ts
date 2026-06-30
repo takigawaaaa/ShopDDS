@@ -13,7 +13,6 @@ export interface LoginRequest {
   username: string
   password: string
   role: Role
-  captcha?: string
 }
 export interface LoginResponse {
   token: string

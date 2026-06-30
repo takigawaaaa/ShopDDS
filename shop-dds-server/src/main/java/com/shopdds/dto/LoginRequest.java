@@ -20,7 +20,4 @@ public class LoginRequest {
     /** 角色：HEAD_ADMIN / WAREHOUSE_ADMIN / SUPERMARKET_ADMIN */
     @NotBlank(message = "角色不能为空")
     private String role;
-
-    /** 验证码 */
-    private String captcha;
 }
