@@ -1,0 +1,18 @@
+# Maven
+shop-dds-server/target/
+
+# Node
+shop-dds-web/node_modules/
+shop-dds-web/dist/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml

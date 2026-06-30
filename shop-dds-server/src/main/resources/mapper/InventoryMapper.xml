@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopdds.mapper.InventoryMapper">
+
+    <insert id="upsert">
+        INSERT INTO inv (commodity_Id, warehouse_Id, inv_Amount)
+        VALUES (#{commodityId}, #{warehouseId}, #{amount})
+        ON DUPLICATE KEY UPDATE inv_Amount = VALUES(inv_Amount)
+    </insert>
+
+    <update id="summarizeToAllinv">
+        INSERT INTO allinv (commodity_Id, allinv_Amount)
+        SELECT commodity_Id, SUM(inv_Amount) FROM inv GROUP BY commodity_Id
+        ON DUPLICATE KEY UPDATE allinv_Amount = VALUES(allinv_Amount)
+    </update>
+
+    <delete id="clearAllinv">
+        DELETE FROM allinv
+    </delete>
+
+    <select id="findByCommodity" resultType="com.shopdds.entity.Inventory">
+        SELECT commodity_Id, warehouse_Id, inv_Amount, inv_Time
+        FROM inv WHERE commodity_Id = #{commodityId}
+    </select>
+</mapper>

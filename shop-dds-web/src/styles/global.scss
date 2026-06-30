@@ -1,0 +1,104 @@
+:root {
+  --color-primary: #409eff;
+  --color-success: #67c23a;
+  --color-danger: #f56c6c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", Helvetica, Arial, sans-serif;
+  background: #f0f2f5;
+}
+
+.page-container {
+  padding: 20px;
+}
+
+.page-title {
+  margin: 0 0 16px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1d2129;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.el-card.box-card {
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 20% 20%, #a0c4ff 0, transparent 40%),
+    radial-gradient(circle at 80% 80%, #c4a0ff 0, transparent 40%),
+    linear-gradient(135deg, #4e54c8 0%, #6a82fb 100%);
+}
+
+.login-card {
+  width: 380px;
+  padding: 36px 32px 28px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 36px rgba(0, 0, 0, 0.18);
+}
+
+.login-card h2 {
+  margin: 0 0 4px;
+  text-align: center;
+  color: #2257d5;
+}
+.login-card .login-sub {
+  margin: 0 0 24px;
+  text-align: center;
+  color: #8a8f99;
+  font-size: 13px;
+}
+
+.role-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.role-btn {
+  padding: 24px 12px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid #e4e7ed;
+  transition: all 0.2s;
+  background: #fff;
+}
+.role-btn:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(64, 158, 255, 0.25);
+}
+.role-btn .role-icon {
+  font-size: 36px;
+  color: var(--color-primary);
+  display: block;
+  margin-bottom: 8px;
+}
+.role-btn .role-name {
+  font-weight: 600;
+  color: #1d2129;
+}
+.role-btn .role-desc {
+  font-size: 12px;
+  color: #8a8f99;
+  margin-top: 4px;
+}

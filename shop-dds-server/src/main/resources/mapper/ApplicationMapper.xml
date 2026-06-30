@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopdds.mapper.ApplicationMapper">
+
+    <insert id="upsert">
+        INSERT INTO apl (supermarket_Id, commodity_Id, apl_Amount)
+        VALUES (#{supermarketId}, #{commodityId}, #{amount})
+        ON DUPLICATE KEY UPDATE apl_Amount = VALUES(apl_Amount)
+    </insert>
+
+    <update id="summarizeToAllapl">
+        INSERT INTO allapl (commodity_Id, allapl_Amount)
+        SELECT commodity_Id, SUM(apl_Amount) FROM apl GROUP BY commodity_Id
+        ON DUPLICATE KEY UPDATE allapl_Amount = VALUES(allapl_Amount)
+    </update>
+
+    <select id="findAll" resultType="com.shopdds.entity.Application">
+        SELECT supermarket_Id, commodity_Id, apl_Amount, apl_Time FROM apl
+    </select>
+
+    <select id="findByCommodity" resultType="com.shopdds.entity.Application">
+        SELECT supermarket_Id, commodity_Id, apl_Amount, apl_Time
+        FROM apl WHERE commodity_Id = #{commodityId}
+    </select>
+</mapper>

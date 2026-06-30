@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: shop-dds-server
+  # 数据源配置 —— 请按本地环境修改 url / username / password
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dds?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true
+    username: root
+    password: shopdds123
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+
+  jackson:
+    # 后端返回 JSON 时保留下划线命名（与数据库字段保持一致）
+    property-naming-strategy: com.fasterxml.jackson.databind.PropertyNamingStrategies.LowerCamelCaseStrategy
+    default-property-inclusion: non_null
+
+  # 启动时自动执行建表与初始数据（基于 schema.sql + data.sql）
+  sql:
+    init:
+      mode: always
+      continue-on-error: false
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  configuration:
+    # 列名 commodity_Id 等下划线形式自动映射到驼峰属性 commodityId
+    # 关键：自定义 XML 的 resultType 自动映射依赖此开关（@TableField 注解仅对 MP 自带方法生效）
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: input          # 主键由业务字段提供（如 commodity_Id），非自增
+      logic-delete-field: null
+
+# JWT 配置
+shopdds:
+  jwt:
+    secret: shopdds-secret-key-must-be-at-least-256-bits-for-hs256-algorithm-fzu-2023
+    expiration-ms: 86400000   # 24 小时
+
+server:
+  port: 8090
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    com.shopdds: debug
+    com.shopdds.mapper: debug

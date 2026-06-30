@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopdds.mapper.AllocateMapper">
+
+    <insert id="batchUpsert" parameterType="java.util.List">
+        INSERT INTO allocate (supermarket_Id, warehouse_Id, commodity_Id, allocate_Amount)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.supermarketId}, #{item.warehouseId}, #{item.commodityId}, #{item.allocateAmount})
+        </foreach>
+        ON DUPLICATE KEY UPDATE allocate_Amount = VALUES(allocate_Amount)
+    </insert>
+
+    <select id="findAll" resultType="com.shopdds.entity.Allocate">
+        SELECT supermarket_Id, warehouse_Id, commodity_Id, allocate_Amount FROM allocate
+    </select>
+
+    <select id="findByWarehouse" resultType="com.shopdds.entity.Allocate">
+        SELECT supermarket_Id, warehouse_Id, commodity_Id, allocate_Amount
+        FROM allocate WHERE warehouse_Id = #{warehouseId}
+    </select>
+
+    <select id="findBySupermarket" resultType="com.shopdds.entity.Allocate">
+        SELECT supermarket_Id, warehouse_Id, commodity_Id, allocate_Amount
+        FROM allocate WHERE supermarket_Id = #{supermarketId}
+    </select>
+
+    <update id="updateAmount">
+        UPDATE allocate SET allocate_Amount = #{amount}
+        WHERE supermarket_Id = #{supermarketId}
+          AND warehouse_Id = #{warehouseId}
+          AND commodity_Id = #{commodityId}
+    </update>
+
+    <delete id="deleteAll">
+        DELETE FROM allocate
+    </delete>
+</mapper>

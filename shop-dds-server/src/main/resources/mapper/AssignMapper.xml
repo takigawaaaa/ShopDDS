@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopdds.mapper.AssignMapper">
+
+    <insert id="upsert">
+        INSERT INTO assign (supermarket_Id, commodity_Id, assign_Amount)
+        VALUES (#{supermarketId}, #{commodityId}, #{amount})
+        ON DUPLICATE KEY UPDATE assign_Amount = VALUES(assign_Amount)
+    </insert>
+
+    <insert id="batchUpsert" parameterType="java.util.List">
+        INSERT INTO assign (supermarket_Id, commodity_Id, assign_Amount)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.supermarketId}, #{item.commodityId}, #{item.assignAmount})
+        </foreach>
+        ON DUPLICATE KEY UPDATE assign_Amount = VALUES(assign_Amount)
+    </insert>
+
+    <select id="findAll" resultType="com.shopdds.entity.Assign">
+        SELECT supermarket_Id, commodity_Id, assign_Amount FROM assign
+    </select>
+
+    <select id="distinctCommodityIds" resultType="java.lang.String">
+        SELECT DISTINCT commodity_Id FROM assign
+    </select>
+
+    <select id="findByCommodity" resultType="com.shopdds.entity.Assign">
+        SELECT supermarket_Id, commodity_Id, assign_Amount
+        FROM assign WHERE commodity_Id = #{commodityId}
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM assign
+    </delete>
+</mapper>

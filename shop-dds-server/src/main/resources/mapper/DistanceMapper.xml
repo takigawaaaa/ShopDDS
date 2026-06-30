@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopdds.mapper.DistanceMapper">
+
+    <insert id="upsert">
+        INSERT INTO dis (warehouse_Id, supermarket_Id, distance)
+        VALUES (#{warehouseId}, #{supermarketId}, #{distance})
+        ON DUPLICATE KEY UPDATE distance = VALUES(distance)
+    </insert>
+
+    <select id="findAll" resultType="com.shopdds.entity.Distance">
+        SELECT warehouse_Id, supermarket_Id, distance FROM dis
+    </select>
+
+    <delete id="deleteOne">
+        DELETE FROM dis WHERE warehouse_Id = #{warehouseId} AND supermarket_Id = #{supermarketId}
+    </delete>
+
+    <select id="findByPairs" resultType="com.shopdds.entity.Distance">
+        SELECT warehouse_Id, supermarket_Id, distance FROM dis
+        WHERE warehouse_Id IN
+        <foreach collection="warehouseIds" item="wid" open="(" separator="," close=")">
+            #{wid}
+        </foreach>
+        AND supermarket_Id IN
+        <foreach collection="supermarketIds" item="sid" open="(" separator="," close=")">
+            #{sid}
+        </foreach>
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM dis
+    </delete>
+</mapper>

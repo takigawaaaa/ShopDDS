@@ -1,0 +1,20 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: shopdds-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: shopdds123
+      MYSQL_DATABASE: dds
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      - shopdds-mysql-data:/var/lib/mysql
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --default-authentication-plugin=caching_sha2_password
+
+volumes:
+  shopdds-mysql-data:
